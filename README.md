@@ -36,7 +36,26 @@ https://your-username.github.io/your-repo-name/
 
 ## Data notes
 
-_Replace this line. Say which rows you left out and why, and how each figure on the site is defined. "Five things that will bite you" in the description sheet lists the problems to cover._
+The site shows the median `sale_price` by `city` and `state`. It includes 35,371 of the
+35,442 source rows: 40 sales below $10,000 and 31 sales above $5,000,000 are excluded because
+the data description identifies those prices as impossible outliers. Prices are otherwise used
+as reported; the median is calculated from the remaining sale prices, with no averaging or
+estimated values.
+
+Each source row is identified by `listing_id`, not `address_street`. Street addresses are not
+unique, so the site does not deduplicate by address and does not collapse repeated addresses.
+The current site does not calculate Days on Market, but if that metric is added it must be
+`contract_date - list_date`; rows missing either date must be excluded from that calculation,
+not treated as zero. We do not rely on `home_type`, which the data description documents as
+unreliable.
+
+The current site does not use `living_area_sqft`, `lot_size_sqft`, `baths`, `tax_annual_amount`,
+or `tax_assessed_value`, so it does not filter rows for missing dates, zero living area, extreme
+lot sizes, impossible bathroom counts, or impossible tax values. In particular, the 127 rows
+with zero living area are not used in a price-per-square-foot calculation, and the documented
+extreme lot, bathroom, and tax values do not affect the displayed medians. If those fields are
+used in a future metric, the impossible values must be excluded rather than silently treated as
+valid or zero.
 
 ## Tools we used
 
