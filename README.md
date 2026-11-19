@@ -1,4 +1,4 @@
-# [Your site's title]
+# College-Town Home Sales Dashboard
 
 ## Start here (delete this section before you submit)
 
@@ -28,11 +28,11 @@ Don't edit any of the five dataset files. Your site needs only the CSV file. The
 
 ## What this site is for
 
-_Replace this line with your site's question and audience, or a short description of the site._
+This site is intended to help users get a feel for the average price of housing in certain college towns based on the data. By filtering the options by location, users can easily get a feel for how housing is priced there, and can make decisions on their own budgets. This can involve checking whether a prospective building is far above the average, or if a location is within a user's price range.
 
 ## Live site
 
-https://your-username.github.io/your-repo-name/
+[onyxcosmium.github.io/campustown-home-sames-site/](https://onyxcosmium.github.io/campustown-home-sales-site/)
 
 ## Data notes
 
@@ -59,12 +59,8 @@ valid or zero.
 
 ## Tools we used
 
-_Replace this line with your AI coding agent or agents, and any libraries and other tools you used._
+This website was built with assistance from GitHub Copilot.
 
 ## Citation
 
 College-town home sales dataset, version 1.0 (2026). University of Illinois-Deloitte Foundation Center for Business Emerging Technologies. Data collected March 2026.
-
-## Who did what
-
-_For teams: replace this line with each member's name and what they did. If you worked alone, delete this section._
