@@ -11,3 +11,11 @@ Copy this outline for each entry:
 - **Agent produced:** What it made or changed.
 - **Checked or changed:** How you checked it, and what you fixed.
 ```
+
+```markdown
+## 2026-11-18: Adding a City Median Price Range Table
+
+- **Asked:** "Red AGENTS.md and docs/data_description_sheet.md first. Then replace the placeholder index.html with a page that shows the median sale price for each city, computed from data/college_town_home_sales.csv. Leave out sales under $10,000 and state that rule on the page."
+- **Agent produced:** Copilot added a new page to my website, filtering the dataset to sale prices >= 10,000, grouped it by city and state, then calculated their medians.
+- **Checked or changed:** No edits were made. This was to ensure that Copilot actually pushed changes to the website.
+```
