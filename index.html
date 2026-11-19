@@ -47,14 +47,126 @@
       font-size: 1.05rem;
     }
 
-    .rule {
+    .filters {
       margin: 1.75rem 0 2rem;
+      border: 1px solid var(--line);
       border-left: 4px solid var(--accent);
       background: var(--accent-light);
-      padding: 0.85rem 1rem;
+      padding: 1rem;
     }
 
-    .rule strong { color: var(--accent); }
+    .filter-label {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    select {
+      width: min(100%, 32rem);
+      border: 1px solid #b9c9d2;
+      border-radius: 0.35rem;
+      background: white;
+      color: var(--ink);
+      font: inherit;
+      padding: 0.65rem 0.75rem;
+    }
+
+    .filter-group + .filter-group { margin-top: 1rem; }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin: 0 0 2rem;
+    }
+
+    .kpi-card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 0.75rem;
+      background: white;
+      padding: 1.1rem;
+      box-shadow: 0 0.35rem 1.25rem rgb(23 32 51 / 0.05);
+    }
+
+    .kpi-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .kpi-value {
+      display: block;
+      margin-top: 0.35rem;
+      overflow-wrap: anywhere;
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .kpi-detail {
+      display: block;
+      margin-top: 0.45rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .chart-card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 0.75rem;
+      background: white;
+      padding: 1.1rem;
+      box-shadow: 0 0.35rem 1.25rem rgb(23 32 51 / 0.05);
+    }
+
+    .chart-card-wide { grid-column: 1 / -1; }
+
+    .chart-card h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+    }
+
+    .chart-subtitle {
+      min-height: 2.5rem;
+      margin: 0.25rem 0 0.75rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .chart {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 28rem;
+      overflow: visible;
+    }
+
+    .axis-line { stroke: #ccd3de; stroke-width: 1; }
+    .grid-line { stroke: #edf0f4; stroke-width: 1; }
+    .chart-label { fill: var(--muted); font-size: 12px; }
+    .chart-bar { fill: #78a7bc; }
+    .chart-bar-highlight { fill: var(--accent); }
+    .chart-line { fill: none; stroke: var(--accent); stroke-width: 3; }
+    .chart-point { fill: var(--accent); stroke: white; stroke-width: 1; }
+    .scatter-point { fill: #78a7bc; fill-opacity: 0.45; stroke: none; }
+    .scatter-outlier { fill: #b44c3d; fill-opacity: 0.7; }
 
     .table-wrap {
       overflow-x: auto;
@@ -104,6 +216,54 @@
       color: var(--muted);
     }
 
+    .table-toolbar {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .table-toolbar h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+    }
+
+    .table-search {
+      width: min(100%, 18rem);
+    }
+
+    .table-search input {
+      width: 100%;
+      border: 1px solid #b9c9d2;
+      border-radius: 0.35rem;
+      background: white;
+      color: var(--ink);
+      font: inherit;
+      padding: 0.55rem 0.7rem;
+    }
+
+    .sort-button {
+      border: 0;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 0;
+      text-transform: uppercase;
+    }
+
+    .sort-button::after {
+      content: " ↕";
+      color: #98a1af;
+    }
+
+    .sort-button[aria-sort="ascending"]::after { content: " ↑"; }
+    .sort-button[aria-sort="descending"]::after { content: " ↓"; }
+
     footer {
       margin-top: 2rem;
       color: var(--muted);
@@ -114,27 +274,105 @@
       main { padding-top: 2.25rem; }
       th, td { padding: 0.75rem 0.8rem; }
     }
+
+    @media (max-width: 52rem) {
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 38rem) {
+      .kpi-grid { grid-template-columns: 1fr; }
+      .chart-grid { grid-template-columns: 1fr; }
+      .chart-card-wide { grid-column: auto; }
+      .table-toolbar { align-items: stretch; flex-direction: column; }
+      .table-search { width: 100%; }
+    }
   </style>
 </head>
 <body>
   <main>
     <h1>College-town home sales</h1>
-    <p class="subtitle">Median sale price by city across 18 college towns and surrounding communities.</p>
+    <p class="subtitle" id="subtitle">Median sale price by market location across all 11 campuses. Cleaning applied: sales below $10,000 or above $5,000,000 are excluded as impossible outliers; blank values remain missing.</p>
 
-    <p class="rule"><strong>Sale-price rule:</strong> Sales below $10,000 or above $5,000,000 are left out as impossible outliers.</p>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">City</th>
-            <th scope="col">Median sale price</th>
-          </tr>
-        </thead>
-        <tbody id="median-rows"></tbody>
-      </table>
-      <p id="status" role="status">Loading sale data...</p>
+    <div class="filters">
+      <div class="filter-group">
+        <label class="filter-label" for="campus-filter">Campus</label>
+        <select id="campus-filter" disabled>
+          <option>Loading campuses...</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label" for="city-filter">Market location</label>
+        <select id="city-filter" disabled>
+          <option>Loading market locations...</option>
+        </select>
+      </div>
     </div>
+
+    <div class="kpi-grid" aria-label="Summary metrics">
+      <article class="kpi-card">
+        <span class="kpi-label">Median sale price</span>
+        <strong class="kpi-value" id="kpi-price">—</strong>
+        <span class="kpi-detail">Cleaned sales in the selected area</span>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">Homes sold</span>
+        <strong class="kpi-value" id="kpi-count">—</strong>
+        <span class="kpi-detail">Sales in the selected area</span>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">Median price / sq. ft.</span>
+        <strong class="kpi-value" id="kpi-psf">—</strong>
+        <span class="kpi-detail">Among homes with reported living area</span>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">Market range</span>
+        <strong class="kpi-value" id="kpi-range">—</strong>
+        <span class="kpi-detail" id="kpi-range-detail">Most expensive vs. most affordable location</span>
+      </article>
+    </div>
+
+    <div class="chart-grid" aria-label="Market analysis charts">
+      <article class="chart-card">
+        <h2>Campus price comparison</h2>
+        <p class="chart-subtitle" id="bar-subtitle">Median sale price ranked across campuses</p>
+        <svg id="campus-bar-chart" class="chart" role="img" aria-label="Horizontal bar chart comparing median sale prices"></svg>
+      </article>
+      <article class="chart-card">
+        <h2>Price trends over time</h2>
+        <p class="chart-subtitle" id="trend-subtitle">Median sale price by year</p>
+        <svg id="price-trend-chart" class="chart" role="img" aria-label="Line chart of median sale prices by year"></svg>
+      </article>
+      <article class="chart-card chart-card-wide">
+        <h2>Home size vs. sale price</h2>
+        <p class="chart-subtitle" id="scatter-subtitle">Sale price compared with reported living area; red points have living area above 10,000 square feet</p>
+        <svg id="scatter-chart" class="chart" role="img" aria-label="Scatter plot of living area and sale price"></svg>
+      </article>
+    </div>
+
+    <section aria-labelledby="table-title">
+      <div class="table-toolbar">
+        <h2 id="table-title">City summary</h2>
+        <label class="table-search" for="table-search">
+          <span class="filter-label">Search cities</span>
+          <input id="table-search" type="search" placeholder="Search city or state">
+        </label>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col"><button class="sort-button" type="button" data-sort="city">City</button></th>
+              <th scope="col"><button class="sort-button" type="button" data-sort="count">Sales count</button></th>
+              <th scope="col"><button class="sort-button" type="button" data-sort="price">Median sale price</button></th>
+              <th scope="col"><button class="sort-button" type="button" data-sort="beds">Avg. beds</button></th>
+              <th scope="col"><button class="sort-button" type="button" data-sort="baths">Avg. baths</button></th>
+            </tr>
+          </thead>
+          <tbody id="median-rows"></tbody>
+        </table>
+        <p id="status" role="status">Loading sale data...</p>
+      </div>
+    </section>
 
     <footer>
       Source: College-town home sales dataset, version 1.0 (2026). University of Illinois-Deloitte Foundation Center for Business Emerging Technologies.
@@ -188,9 +426,200 @@
         : (sorted[middle - 1] + sorted[middle]) / 2;
     }
 
+    function svgNode(name, attributes = {}, text = "") {
+      const node = document.createElementNS("http://www.w3.org/2000/svg", name);
+      for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, value);
+      if (text) node.textContent = text;
+      return node;
+    }
+
+    function compactCurrency(value) {
+      if (value >= 1000000) return `$${(value / 1000000).toFixed(value % 1000000 ? 1 : 0)}M`;
+      if (value >= 1000) return `$${Math.round(value / 1000)}k`;
+      return `$${Math.round(value)}`;
+    }
+
+    function average(values) {
+      const valid = values.filter((value) => Number.isFinite(value));
+      return valid.length ? valid.reduce((sum, value) => sum + value, 0) / valid.length : null;
+    }
+
+    function renderBarChart(cleanedRecords, selectedCampus, selectedCity) {
+      const chart = document.querySelector("#campus-bar-chart");
+      const subtitle = document.querySelector("#bar-subtitle");
+      const groups = new Map();
+      const groupingField = selectedCity ? "city" : selectedCampus ? "city" : "campus";
+
+      for (const record of cleanedRecords) {
+        const label = groupingField === "campus"
+          ? record.campus
+          : groupingField === "city" && selectedCity
+            ? `${record.city}, ${record.state}`
+            : `${record.city}, ${record.state}`;
+        if (!groups.has(label)) groups.set(label, []);
+        groups.get(label).push(record.price);
+      }
+
+      const items = [...groups].map(([label, prices]) => ({
+        label,
+        value: median(prices)
+      })).sort((a, b) => b.value - a.value);
+
+      subtitle.textContent = selectedCity
+        ? `Median sale price for ${items[0]?.label || "the selected market"}`
+        : selectedCampus
+          ? `Median sale price ranked across the selected campus's market locations`
+          : "Median sale price ranked across all 11 campuses";
+
+      const width = 760;
+      const left = 210;
+      const right = 25;
+      const top = 20;
+      const rowHeight = 34;
+      const height = Math.max(180, top * 2 + items.length * rowHeight);
+      const maxValue = Math.max(...items.map(({ value }) => value), 1);
+      chart.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      chart.replaceChildren();
+
+      const highlight = (label) => label.includes("Champaign") || label.includes("Urbana") ||
+        label.includes("Illinois Urbana-Champaign");
+
+      items.forEach((item, index) => {
+        const y = top + index * rowHeight;
+        const barWidth = (width - left - right) * item.value / maxValue;
+        chart.append(
+          svgNode("text", { x: left - 10, y: y + 15, "text-anchor": "end", class: "chart-label" },
+            item.label),
+          svgNode("rect", {
+            x: left,
+            y,
+            width: barWidth,
+            height: 20,
+            rx: 3,
+            class: highlight(item.label) ? "chart-bar-highlight" : "chart-bar"
+          }),
+          svgNode("text", { x: left + barWidth + 7, y: y + 15, class: "chart-label" },
+            compactCurrency(item.value))
+        );
+      });
+    }
+
+    function renderTrendChart(cleanedRecords) {
+      const chart = document.querySelector("#price-trend-chart");
+      const byYear = new Map();
+      for (const record of cleanedRecords) {
+        const year = record.saleDate?.slice(0, 4);
+        if (!year) continue;
+        if (!byYear.has(year)) byYear.set(year, []);
+        byYear.get(year).push(record.price);
+      }
+      const items = [...byYear].map(([year, prices]) => ({
+        year,
+        value: median(prices)
+      })).sort((a, b) => a.year.localeCompare(b.year));
+
+      const width = 760;
+      const height = 280;
+      const left = 68;
+      const right = 25;
+      const top = 20;
+      const bottom = 42;
+      const plotWidth = width - left - right;
+      const plotHeight = height - top - bottom;
+      const values = items.map(({ value }) => value);
+      const minValue = Math.min(...values, 0);
+      const maxValue = Math.max(...values, 1);
+      const range = maxValue - minValue || 1;
+      const x = (index) => left + (items.length === 1 ? plotWidth / 2 : index * plotWidth / (items.length - 1));
+      const y = (value) => top + plotHeight - (value - minValue) / range * plotHeight;
+
+      chart.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      chart.replaceChildren();
+      for (let step = 0; step <= 4; step += 1) {
+        const value = minValue + range * step / 4;
+        const gridY = y(value);
+        chart.append(
+          svgNode("line", { x1: left, y1: gridY, x2: width - right, y2: gridY, class: "grid-line" }),
+          svgNode("text", { x: left - 8, y: gridY + 4, "text-anchor": "end", class: "chart-label" },
+            compactCurrency(value))
+        );
+      }
+      if (items.length > 1) {
+        const points = items.map((item, index) => `${x(index)},${y(item.value)}`).join(" ");
+        chart.append(svgNode("polyline", { points, class: "chart-line" }));
+      }
+      items.forEach((item, index) => {
+        chart.append(
+          svgNode("circle", { cx: x(index), cy: y(item.value), r: 5, class: "chart-point" }),
+          svgNode("text", { x: x(index), y: height - 14, "text-anchor": "middle", class: "chart-label" }, item.year),
+          svgNode("text", { x: x(index), y: y(item.value) - 10, "text-anchor": "middle", class: "chart-label" },
+            compactCurrency(item.value))
+        );
+      });
+    }
+
+    function renderScatterChart(cleanedRecords) {
+      const chart = document.querySelector("#scatter-chart");
+      const points = cleanedRecords.filter(({ livingArea }) =>
+        Number.isFinite(livingArea) && livingArea > 0
+      );
+      const width = 760;
+      const height = 420;
+      const left = 68;
+      const right = 20;
+      const top = 20;
+      const bottom = 48;
+      const plotWidth = width - left - right;
+      const plotHeight = height - top - bottom;
+      const maxArea = Math.max(...points.map(({ livingArea }) => livingArea), 1);
+      const maxPrice = Math.max(...points.map(({ price }) => price), 1);
+      const x = (area) => left + area / maxArea * plotWidth;
+      const y = (price) => top + plotHeight - price / maxPrice * plotHeight;
+
+      chart.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      chart.replaceChildren();
+      for (let step = 0; step <= 4; step += 1) {
+        const gridX = left + plotWidth * step / 4;
+        const gridY = top + plotHeight * step / 4;
+        chart.append(
+          svgNode("line", { x1: gridX, y1: top, x2: gridX, y2: top + plotHeight, class: "grid-line" }),
+          svgNode("line", { x1: left, y1: gridY, x2: left + plotWidth, y2: gridY, class: "grid-line" }),
+          svgNode("text", { x: gridX, y: height - 20, "text-anchor": "middle", class: "chart-label" },
+            `${Math.round(maxArea * step / 4).toLocaleString("en-US")}`),
+          svgNode("text", { x: left - 8, y: top + plotHeight - plotHeight * step / 4 + 4, "text-anchor": "end", class: "chart-label" },
+            compactCurrency(maxPrice * step / 4))
+        );
+      }
+      chart.append(
+        svgNode("line", { x1: left, y1: top + plotHeight, x2: left + plotWidth, y2: top + plotHeight, class: "axis-line" }),
+        svgNode("line", { x1: left, y1: top, x2: left, y2: top + plotHeight, class: "axis-line" }),
+        svgNode("text", { x: left + plotWidth / 2, y: height - 2, "text-anchor": "middle", class: "chart-label" }, "Living area (sq. ft.)")
+      );
+      for (const record of points) {
+        chart.append(svgNode("circle", {
+          cx: x(record.livingArea),
+          cy: y(record.price),
+          r: record.livingArea > 10000 ? 4 : 2.25,
+          class: record.livingArea > 10000 ? "scatter-outlier" : "scatter-point"
+        }));
+      }
+    }
+
     async function showMedians() {
       const status = document.querySelector("#status");
       const tbody = document.querySelector("#median-rows");
+      const subtitle = document.querySelector("#subtitle");
+      const campusFilter = document.querySelector("#campus-filter");
+      const cityFilter = document.querySelector("#city-filter");
+      const kpiPrice = document.querySelector("#kpi-price");
+      const kpiCount = document.querySelector("#kpi-count");
+      const kpiPsf = document.querySelector("#kpi-psf");
+      const kpiRange = document.querySelector("#kpi-range");
+      const kpiRangeDetail = document.querySelector("#kpi-range-detail");
+      const tableSearch = document.querySelector("#table-search");
+      let tableSortKey = "city";
+      let tableSortDirection = "asc";
+      let summaryRows = [];
 
       try {
         const response = await fetch("data/college_town_home_sales.csv");
@@ -201,36 +630,189 @@
         const headers = rows.shift();
         const cityIndex = headers.indexOf("city");
         const stateIndex = headers.indexOf("state");
+        const campusIndex = headers.indexOf("university");
         const priceIndex = headers.indexOf("sale_price");
-        const pricesByCity = new Map();
+        const livingAreaIndex = headers.indexOf("living_area_sqft");
+        const saleDateIndex = headers.indexOf("sale_date");
+        const bedsIndex = headers.indexOf("beds");
+        const bathsIndex = headers.indexOf("baths");
+        const records = rows.map((row) => ({
+          city: row[cityIndex],
+          state: row[stateIndex],
+          campus: row[campusIndex],
+          price: Number(row[priceIndex]),
+          livingArea: Number(row[livingAreaIndex]),
+          saleDate: row[saleDateIndex],
+          beds: Number(row[bedsIndex]),
+          baths: Number(row[bathsIndex])
+        }));
+        const campuses = [...new Set(records.map(({ campus }) => campus))].sort((a, b) =>
+          a.localeCompare(b)
+        );
 
-        for (const row of rows) {
-          const price = Number(row[priceIndex]);
-          if (!Number.isFinite(price) || price < 10000 || price > 5000000) continue;
+        campusFilter.innerHTML = [
+          '<option value="">All campuses</option>',
+          ...campuses.map((campus) => `<option value="${campus}">${campus}</option>`)
+        ].join("");
+        campusFilter.disabled = false;
 
-          const city = row[cityIndex];
-          const state = row[stateIndex];
-          const key = `${city}|${state}`;
-          if (!pricesByCity.has(key)) pricesByCity.set(key, { city, state, prices: [] });
-          pricesByCity.get(key).prices.push(price);
+        function updateCityFilter() {
+          const selectedCampus = campusFilter.value;
+          const cities = [...new Set(records
+            .filter(({ campus }) => !selectedCampus || campus === selectedCampus)
+            .map(({ city, state }) => `${city}|${state}`))]
+            .map((key) => {
+              const [city, state] = key.split("|");
+              return { city, state, key };
+            })
+            .sort((a, b) => a.city.localeCompare(b.city) || a.state.localeCompare(b.state));
+
+          cityFilter.innerHTML = [
+            '<option value="">All market locations</option>',
+            ...cities.map(({ city, state, key }) =>
+              `<option value="${key}">${city}, ${state}</option>`
+            )
+          ].join("");
+          cityFilter.disabled = false;
         }
 
-        const cities = [...pricesByCity.values()].sort((a, b) =>
-          a.city.localeCompare(b.city) || a.state.localeCompare(b.state)
-        );
-        const currency = new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD",
-          maximumFractionDigits: 0
-        });
+        function renderSummaryTable() {
+          const query = tableSearch.value.trim().toLowerCase();
+          const filteredRows = summaryRows.filter((row) =>
+            row.city.toLowerCase().includes(query)
+          );
+          const sortedRows = [...filteredRows].sort((a, b) => {
+            let comparison;
+            if (tableSortKey === "city") {
+              comparison = a.city.localeCompare(b.city);
+            } else {
+              const aValue = a[tableSortKey] ?? -1;
+              const bValue = b[tableSortKey] ?? -1;
+              comparison = aValue - bValue;
+            }
+            return tableSortDirection === "asc" ? comparison : -comparison;
+          });
+          const currency = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 0
+          });
 
-        tbody.innerHTML = cities.map(({ city, state, prices }) => `
-          <tr>
-            <td class="city">${city}, <span class="state">${state}</span></td>
-            <td class="median">${currency.format(median(prices))}</td>
-          </tr>
-        `).join("");
-        status.hidden = true;
+          tbody.innerHTML = sortedRows.map((row) => `
+            <tr>
+              <td class="city">${row.city}</td>
+              <td>${row.count.toLocaleString("en-US")}</td>
+              <td class="median">${currency.format(row.price)}</td>
+              <td>${row.beds === null ? "—" : row.beds.toFixed(1)}</td>
+              <td>${row.baths === null ? "—" : row.baths.toFixed(1)}</td>
+            </tr>
+          `).join("");
+          status.hidden = sortedRows.length > 0;
+          status.textContent = sortedRows.length ? "" : "No city summaries match this search.";
+
+          document.querySelectorAll(".sort-button").forEach((button) => {
+            if (button.dataset.sort === tableSortKey) {
+              button.setAttribute("aria-sort", tableSortDirection === "asc" ? "ascending" : "descending");
+            } else {
+              button.removeAttribute("aria-sort");
+            }
+          });
+        }
+
+        function renderTable() {
+          const selectedCampus = campusFilter.value;
+          const selectedCity = cityFilter.value;
+          const selectedRecords = records.filter(({ campus }) =>
+            !selectedCampus || campus === selectedCampus
+          ).filter(({ city, state }) =>
+            !selectedCity || `${city}|${state}` === selectedCity
+          );
+          const pricesByCity = new Map();
+          const cleanedRecords = selectedRecords.filter(({ price }) =>
+            Number.isFinite(price) && price >= 10000 && price <= 5000000
+          );
+          const pricePerSquareFoot = cleanedRecords
+            .filter(({ livingArea }) => Number.isFinite(livingArea) && livingArea > 0)
+            .map(({ price, livingArea }) => price / livingArea);
+
+          for (const { city, state, price } of cleanedRecords) {
+
+            const key = `${city}|${state}`;
+            if (!pricesByCity.has(key)) pricesByCity.set(key, { city, state, prices: [] });
+            pricesByCity.get(key).prices.push(price);
+          }
+
+          const cities = [...pricesByCity.values()].sort((a, b) =>
+            a.city.localeCompare(b.city) || a.state.localeCompare(b.state)
+          );
+          const currency = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+            maximumFractionDigits: 0
+          });
+          const scope = selectedCampus || "all 11 campuses";
+          const locationScope = selectedCity
+            ? selectedCity.replace("|", ", ")
+            : scope;
+          const locationMedians = [...pricesByCity.values()]
+            .map(({ city, state, prices }) => ({
+              label: `${city}, ${state}`,
+              price: median(prices)
+            }))
+            .sort((a, b) => b.price - a.price);
+
+          summaryRows = [...pricesByCity.values()].map(({ city, state, prices }) => {
+            const key = `${city}|${state}`;
+            const cityRecords = cleanedRecords.filter((record) =>
+              `${record.city}|${record.state}` === key
+            );
+            return {
+              city: `${city}, ${state}`,
+              count: cityRecords.length,
+              price: median(prices),
+              beds: average(cityRecords.map(({ beds }) => beds)),
+              baths: average(cityRecords.map(({ baths }) => baths))
+            };
+          });
+          renderSummaryTable();
+          kpiPrice.textContent = cleanedRecords.length ? currency.format(median(cleanedRecords.map(({ price }) => price))) : "—";
+          kpiCount.textContent = cleanedRecords.length.toLocaleString("en-US");
+          kpiPsf.textContent = pricePerSquareFoot.length
+            ? `${currency.format(median(pricePerSquareFoot))} / sq. ft.`
+            : "—";
+          kpiRange.textContent = locationMedians.length
+            ? `${currency.format(locationMedians[0].price)} – ${currency.format(locationMedians[locationMedians.length - 1].price)}`
+            : "—";
+          kpiRangeDetail.textContent = locationMedians.length
+            ? `Highest: ${locationMedians[0].label}; lowest: ${locationMedians[locationMedians.length - 1].label}`
+            : "No cleaned sales in this selection";
+          subtitle.textContent = `Median sale price by market location for ${locationScope}. Cleaning applied: sales below $10,000 or above $5,000,000 are excluded as impossible outliers; zero or blank living areas are excluded from price-per-square-foot; blank values remain missing.`;
+          renderBarChart(cleanedRecords, selectedCampus, selectedCity);
+          renderTrendChart(cleanedRecords);
+          renderScatterChart(cleanedRecords);
+          status.hidden = cities.length > 0;
+        }
+
+        campusFilter.addEventListener("change", () => {
+          updateCityFilter();
+          renderTable();
+        });
+        cityFilter.addEventListener("change", renderTable);
+        tableSearch.addEventListener("input", renderSummaryTable);
+        document.querySelectorAll(".sort-button").forEach((button) => {
+          button.addEventListener("click", () => {
+            const key = button.dataset.sort;
+            if (tableSortKey === key) {
+              tableSortDirection = tableSortDirection === "asc" ? "desc" : "asc";
+            } else {
+              tableSortKey = key;
+              tableSortDirection = key === "city" ? "asc" : "desc";
+            }
+            renderSummaryTable();
+          });
+        });
+        updateCityFilter();
+        renderTable();
       } catch (error) {
         status.textContent = "The sale data could not be loaded.";
         console.error(error);
